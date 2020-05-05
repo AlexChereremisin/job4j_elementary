@@ -49,4 +49,52 @@ public class FindLoopTest {
         int expect = -1;
         assertThat(result, is(expect));
     }
+
+    /**
+     * whenFind3 тест-метод на метод indexOf(int[], int, int, int).
+     * В массиве [5, 2, 10, 2, 4] ищем 2 в диапазоне индексов от 2 до 4.
+     */
+    @Test
+    public void whenFind3() {
+        FindLoop find = new FindLoop();
+        int[] input = new int[] {5, 2, 10, 2, 4};
+        int value = 2;
+        int start = 2;
+        int finish = 4;
+        int result = find.indexOf(input, value, start, finish);
+        int expect = 3;
+        assertThat(result, is(expect));
+    }
+
+    /**
+     * whenFind1 тест-метод на метод indexOf(int[], int, int, int).
+     * В массиве [5, 2, 10, 2, 4] ищем 2 в диапазоне индексов от 2 до 0.
+     */
+    @Test
+    public void whenFind1() {
+        FindLoop find = new FindLoop();
+        int[] input = new int[] {5, 2, 10, 2, 4};
+        int value = 2;
+        int start = 2;
+        int finish = 0;
+        int result = find.indexOf(input, value, start, finish);
+        int expect = 1;
+        assertThat(result, is(expect));
+    }
+
+    /**
+     * whenFind2 тест-метод на метод indexOf(int[], int, int, int).
+     * В массиве [5, 2, 10, 2, 4] ищем 10 в диапазоне индексов от 2 до 2.
+     */
+    @Test
+    public void whenFind2() {
+        FindLoop find = new FindLoop();
+        int[] input = new int[] {5, 2, 10, 2, 4};
+        int value = 10;
+        int start = 2;
+        int finish = 2;
+        int result = find.indexOf(input, value, start, finish);
+        int expect = 2;
+        assertThat(result, is(expect));
+    }
 }

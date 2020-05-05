@@ -1,7 +1,7 @@
 package ru.job4j.array;
 
 /**
- * FindLoop класс содержит метод осуществляющий поиск заданного числа в массиве.
+ * FindLoop класс содержит методы осуществляющие поиск числа в массиве.
  * @author Alexey Cheremisin
  * @since 03.05.2020
  * @version 1
@@ -20,6 +20,29 @@ public class FindLoop {
                 rst = index;
                 break;
             }
+        }
+        return rst;
+    }
+
+    /**
+     * indexOf метод поиска элемента в указанном диапазоне индексов массива.
+     * @param data : массив с целыми числами.
+     * @param el : число, которое надо найти в массиве.
+     * @param start : индекс начала диапазона поиска.
+     * @param finish : индекс конца диапазона поска.
+     * @return ндекс найденного числа в массиве, если такого элемента нет или диапазон за границами массива, то -1.
+     */
+    public int indexOf(int[] data, int el, int start, int finish) {
+        int rst = -1;
+        int startIndex = Math.min(start, finish);
+        int finishIndex = Math.max(start, finish);
+        boolean condition = startIndex >= 0 && finishIndex < data.length;
+        while (startIndex <= finishIndex && condition) {
+            if (data[startIndex] == el) {
+                rst = startIndex;
+                break;
+            }
+            startIndex++;
         }
         return rst;
     }
