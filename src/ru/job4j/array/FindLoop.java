@@ -13,7 +13,7 @@ public class FindLoop {
      * @param el : число, которое надо найти в массиве.
      * @return индекс найденного числа в массиве, если такого элемента нет, то -1.
      */
-    public int indexOf(int[] data, int el) {
+    public static int indexOf(int[] data, int el) {
         int rst = -1;
         for (int index = 0; index < data.length; index++) {
             if (data[index] == el) {
@@ -32,7 +32,7 @@ public class FindLoop {
      * @param finish : индекс конца диапазона поска.
      * @return ндекс найденного числа в массиве, если такого элемента нет или диапазон за границами массива, то -1.
      */
-    public int indexOf(int[] data, int el, int start, int finish) {
+    public static int indexOf(int[] data, int el, int start, int finish) {
         int rst = -1;
         int startIndex = Math.min(start, finish);
         int finishIndex = Math.max(start, finish);
