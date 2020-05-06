@@ -1,7 +1,7 @@
 package ru.job4j.array;
 
 /**
- * MatrixCheck класс содержит метод проверки заполнения строки в двумерном массиве символом 'X'.
+ * MatrixCheck класс содержит методы проверки заполнения строки/столбца в двумерном массиве символом 'X'.
  * @author Alexey Cheremisin
  * @since 06.05.2020
  * @version 1
@@ -17,6 +17,23 @@ public class MatrixCheck {
         boolean result = true;
         for (int cell = 0; cell < board[row].length; cell++) {
             if (board[row][cell] != 'X') {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * monoVertical метод проверки заполнен ли столбец из двумерного массива символоми 'X'
+     * @param board : двумерный массив символов.
+     * @param column : столбец в двумерном массиве, который будем проверять на заполнение.
+     * @return true если все символы в столбце 'X', false если не все 'X'.
+     */
+    public static boolean monoVertical(char[][] board, int column) {
+        boolean result = true;
+        for (int row = 0; row < board.length; row++) {
+            if (board[row][column] != 'X') {
                 result = false;
                 break;
             }
