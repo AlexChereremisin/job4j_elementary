@@ -34,15 +34,15 @@ public class FindLoop {
      */
     public static int indexOf(int[] data, int el, int start, int finish) {
         int rst = -1;
-        int startIndex = Math.min(start, finish);
-        int finishIndex = Math.max(start, finish);
-        boolean condition = startIndex >= 0 && finishIndex < data.length;
-        while (startIndex <= finishIndex && condition) {
-            if (data[startIndex] == el) {
-                rst = startIndex;
+        int source = Math.min(start, finish);
+        int end = Math.max(start, finish);
+        boolean condition = source >= 0 && end < data.length;
+        while (source <= end && condition) {
+            if (data[source] == el) {
+                rst = source;
                 break;
             }
-            startIndex++;
+            source++;
         }
         return rst;
     }

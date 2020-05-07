@@ -21,7 +21,6 @@ public class BarleyBreak {
                 count++;
             }
         }
-
         for (int[] row : numbers) {
             for (int cell : row) {
                 System.out.print(cell + " ");

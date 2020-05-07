@@ -38,8 +38,8 @@ public class SwitchArray {
      * @param args массив строк
      */
     public static void main(String[] args) {
-        int[] nums = new int[] {1, 2, 3, 4, 5, 6};
-        int[] rsl = swapBorder(nums);
+        int[] ints = new int[] {1, 2, 3, 4, 5, 6};
+        int[] rsl = swapBorder(ints);
         for (int index = 0; index < rsl.length; index++) {
             System.out.println(rsl[index]);
         }
