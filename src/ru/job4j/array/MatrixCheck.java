@@ -9,8 +9,8 @@ package ru.job4j.array;
 public class MatrixCheck {
     /**
      * monoHorizontal метод проверки заполнина ли строка из двумерного массива символоми 'X'
-     * @param board : двумерный массив символов.
-     * @param row : строка в двумерном массиве, которою будем проверять на заполнение.
+     * @param board двумерный массив символов.
+     * @param row строка в двумерном массиве, которою будем проверять на заполнение.
      * @return true если все символы в строке 'X', false если не все 'X'.
      */
     public static boolean monoHorizontal(char[][] board, int row) {
@@ -26,7 +26,7 @@ public class MatrixCheck {
 
     /**
      * monoVertical метод проверки заполнен ли столбец из двумерного массива символоми 'X'
-     * @param board : двумерный массив символов.
+     * @param board двумерный массив символов.
      * @param column : столбец в двумерном массиве, который будем проверять на заполнение.
      * @return true если все символы в столбце 'X', false если не все 'X'.
      */
@@ -43,7 +43,7 @@ public class MatrixCheck {
 
     /**
      * extractDiagonal метод заполняет одномерный массив элементами из диагонали двумерного массива.
-     * @param board : двумерный массив символов.
+     * @param board двумерный массив символов.
      * @return одномерный массив из элементов диагонали массива board[i][j].(диагональю считаем элементы с индексами i == j).
      */
     public static char[] extractDiagonal(char[][] board) {
@@ -52,5 +52,22 @@ public class MatrixCheck {
             rsl[index] = board[index][index];
         }
         return rsl;
+    }
+
+    /**
+     * isWin метод проверки выйгрышной ситуации.
+     * Выйгрвышной ситуацией, являются заполнение строки или столбца символами 'X'.
+     * @param board двумерный массив символов, заполненый элементами 'X' и '_'.
+     * @return true если есть выйгрышная ситуация, false если выйгрышных ситуаций нет.
+     */
+    public static boolean isWin(char[][] board) {
+        boolean result = false;
+        for (int index = 0; index < board.length; index++) {
+            if (board[index][index] == 'X' && (monoHorizontal(board, index) || monoVertical(board, index))) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 }
