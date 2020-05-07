@@ -16,20 +16,8 @@ public class SortSelected {
         for (int index = 0; index < data.length; index++) {
             int min = MinDiapason.findMin(data, index, data.length - 1);
             int minIndex = FindLoop.indexOf(data, min, index, data.length - 1);
-            swap(data, index, minIndex);
+            SwitchArray.swap(data, index, minIndex);
         }
         return data;
-    }
-
-    /**
-     * swap метод пермены местами элементов массива с индексами start и finish.
-     * @param data : массив чисел.
-     * @param start : начальный индекс.
-     * @param finish : конечный индекс.
-     */
-    public static void swap(int[] data, int start, int finish) {
-        int tmp = data[start];
-        data[start] = data[finish];
-        data[finish] = tmp;
     }
 }
