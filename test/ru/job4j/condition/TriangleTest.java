@@ -1,19 +1,22 @@
 package ru.job4j.condition;
 
 import org.junit.Test;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class TriangleTest {
     @Test
     public void whenExist() {
-        boolean result = Triangle.exist(2.0, 2.0, 2.0);
-        assertThat(result, is(true));
+        Triangle triangle = new Triangle(new Point(1, 1), new Point(1, 3), new Point(3, 3));
+        double result = triangle.area();
+        double expected = 1.99;
+        assertEquals(expected, result, 0.01);
     }
 
     @Test
     public void whenNotExist() {
-        boolean result = Triangle.exist(2.0, 2.0, 6.0);
-        assertThat(result, is(false));
+        Triangle triangle = new Triangle(new Point(1, 1), new Point(2, 2), new Point(3, 3));
+        double result = triangle.area();
+        double expected = -1;
+        assertEquals(expected, result, 0.01);
     }
 }
