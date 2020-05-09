@@ -6,9 +6,11 @@ public class BallStory {
         Hare hare = new Hare();
         Wolf wolf = new Wolf();
         Fox fox = new Fox();
-        ball.tryEat(ball);
         hare.tryEat(ball);
+        ball.tryRoll(hare);
         wolf.tryEat(ball);
+        ball.tryRoll(wolf);
         fox.tryEat(ball);
+        ball.tryRoll(fox);
     }
 }
