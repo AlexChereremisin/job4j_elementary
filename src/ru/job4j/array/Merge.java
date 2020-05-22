@@ -5,54 +5,40 @@ import java.util.Arrays;
 public class Merge {
     public int[] merge(int[] left, int[] right) {
         int[] rsl = new int[left.length + right.length];
-        if (left.length == 0 && right.length != 0) {
-            return right;
-        }
-        if (right.length == 0 && left.length != 0) {
-            return left;
-        }
         if (left.length == 0 && right.length == 0) {
             return rsl;
         }
-        int elemL = 0;
-        int countL = 0;
-        int elemR = 0;
-        int countR = 0;
-        for (int index = 0; index < rsl.length - 1; index++) {
-            if (left[elemL] < right[elemR]) {
-                countL++;
-                if (countL > left.length) {
-                    rsl[index] = right[elemR];
-                    elemR = ++elemR < right.length ? elemR : right.length - 1;
-                    continue;
-                }
-                rsl[index] = left[elemL];
-                elemL = ++elemL < left.length ? elemL : left.length - 1;
-            } else if (left[elemL] > right[elemR]) {
-                countR++;
-                if (countR > right.length) {
-                    rsl[index] = left[elemL];
-                    elemL = ++elemL < left.length ? elemL : left.length - 1;
-                    continue;
-                }
-                rsl[index] = right[elemR];
-                elemR = ++elemR < right.length ? elemR : right.length - 1;
-            } else {
-                countL++;
-                if (countL > left.length) {
-                    rsl[index] = right[elemR];
-                    elemR = ++elemR < right.length ? elemR : right.length - 1;
-                } else {
-                    rsl[index] = left[elemL];
-                    elemL = ++elemL < left.length ? elemL : left.length - 1;
-                }
-
-            }
+        if (left.length == 0) {
+            return right;
         }
-        if (left[elemL] > right[elemR]) {
-            rsl[rsl.length - 1] = left[elemL];
-        } else {
-            rsl[rsl.length - 1] = right[elemR];
+        if (right.length == 0) {
+            return left;
+        }
+        int pstL = 0;
+        int pstR = 0;
+        while (pstL + pstR < rsl.length) {
+            pstL = pstL < left.length ? pstL : left.length - 1;
+            pstR = pstR < right.length ? pstR : right.length - 1;
+            rsl[pstL + pstR] = Math.min(left[pstL], right[pstR]);
+            if (left[pstL] == right[pstR]) {
+                pstL++;
+                pstR++;
+            } else if (left[pstL] == rsl[pstL + pstR]) {
+                pstL++;
+                if (pstL > left.length - 1) {
+                    rsl[pstL + pstR] = Math.max(left[left.length - 1], right[pstR]);
+                    pstR++;
+                }
+            } else if (right[pstR] == rsl[pstL + pstR]) {
+                pstR++;
+                if (pstR > right.length - 1) {
+                    rsl[pstL + pstR] = Math.max(left[pstL], right[right.length - 1]);
+                    pstL++;
+                }
+            }
+            if (pstL >= left.length - 1 ^ pstR >= right.length - 1) {
+                rsl[rsl.length - 1] = Math.max(left[left.length - 1], right[right.length - 1]);
+            }
         }
         return rsl;
     }
