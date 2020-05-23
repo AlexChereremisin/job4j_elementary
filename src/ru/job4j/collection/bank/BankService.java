@@ -14,10 +14,12 @@ public class BankService {
 
     public void addAccount(String passport, Account account) {
         User user = this.findByPassport(passport);
-        List<Account> rsl = this.users.get(user);
-        if (!rsl.contains(account)) {
-            rsl.add(account);
-            this.users.put(user, rsl);
+        if (user != null) {
+            List<Account> rsl = this.users.get(user);
+            if (!rsl.contains(account)) {
+                rsl.add(account);
+                this.users.put(user, rsl);
+            }
         }
     }
 
