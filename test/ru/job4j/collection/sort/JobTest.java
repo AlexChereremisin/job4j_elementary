@@ -15,7 +15,7 @@ public class JobTest {
         Comparator<Job> cmpNamePriority = new JobDescByPriority().thenComparing(new JobDescByNameReverseOrder());
         int rsl = cmpNamePriority.compare(
                 new Job("A", 2),
-                new Job("B", 1)
+                new Job("B", 2)
         );
         assertThat(rsl, greaterThan(0));
     }
@@ -24,7 +24,7 @@ public class JobTest {
     public void whenReversePriorityAndName() {
         Comparator<Job> cmpNamePriority = new JobDescByPriorityReverseOrder().thenComparing(new JobDescByName());
         int rsl = cmpNamePriority.compare(
-                new Job("A", 2),
+                new Job("A", 1),
                 new Job("B", 1)
         );
         assertThat(rsl, lessThan(0));
@@ -35,17 +35,57 @@ public class JobTest {
         Comparator<Job> cmpNamePriority = new JobDescByPriority().thenComparing(new JobDescByName());
         int rsl = cmpNamePriority.compare(
                 new Job("B", 2),
-                new Job("C", 1)
+                new Job("C", 2)
         );
-        assertThat(rsl, greaterThan(0));
+        assertThat(rsl, lessThan(0));
     }
 
     @Test
     public void whenPriorityReverseAndNameReverse() {
         Comparator<Job> cmpNamePriority = new JobDescByPriorityReverseOrder().thenComparing(new JobDescByNameReverseOrder());
         int rsl = cmpNamePriority.compare(
-                new Job("B", 2),
-                new Job("C", 1)
+                new Job("B", 4),
+                new Job("C", 4)
+        );
+        assertThat(rsl, greaterThan(0));
+    }
+
+    @Test
+    public void whenReverseNameAndPriority() {
+        Comparator<Job> cmpNamePriority = new JobDescByNameReverseOrder().thenComparing(new JobDescByPriority());
+        int rsl = cmpNamePriority.compare(
+                new Job("Aa", 2),
+                new Job("Aa", 1)
+        );
+        assertThat(rsl, greaterThan(0));
+    }
+
+    @Test
+    public void whenNameAndReversePriority() {
+        Comparator<Job> cmpNamePriority = new JobDescByName().thenComparing(new JobDescByPriorityReverseOrder());
+        int rsl = cmpNamePriority.compare(
+                new Job("Aa", 2),
+                new Job("Aa", 1)
+        );
+        assertThat(rsl, lessThan(0));
+    }
+
+    @Test
+    public void whenNameAndPriority() {
+        Comparator<Job> cmpNamePriority = new JobDescByName().thenComparing(new JobDescByPriority());
+        int rsl = cmpNamePriority.compare(
+                new Job("Aa", 2),
+                new Job("Aa", 1)
+        );
+        assertThat(rsl, greaterThan(0));
+    }
+
+    @Test
+    public void whenNameReverseAndPriorityReverse() {
+        Comparator<Job> cmpNamePriority = new JobDescByNameReverseOrder().thenComparing(new JobDescByPriorityReverseOrder());
+        int rsl = cmpNamePriority.compare(
+                new Job("Aa", 2),
+                new Job("Aa", 1)
         );
         assertThat(rsl, lessThan(0));
     }
