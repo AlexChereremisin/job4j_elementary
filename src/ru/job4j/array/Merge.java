@@ -14,30 +14,21 @@ public class Merge {
         if (right.length == 0) {
             return left;
         }
-        int pstL = 0;
-        int pstR = 0;
-        while (pstL + pstR < rsl.length) {
-            pstL = pstL < left.length ? pstL : left.length - 1;
-            pstR = pstR < right.length ? pstR : right.length - 1;
-            rsl[pstL + pstR] = Math.min(left[pstL], right[pstR]);
-            if (left[pstL] == right[pstR]) {
-                pstL++;
-                pstR++;
-            } else if (left[pstL] == rsl[pstL + pstR]) {
-                pstL++;
-                if (pstL > left.length - 1) {
-                    rsl[pstL + pstR] = Math.max(left[left.length - 1], right[pstR]);
-                    pstR++;
-                }
-            } else if (right[pstR] == rsl[pstL + pstR]) {
-                pstR++;
-                if (pstR > right.length - 1) {
-                    rsl[pstL + pstR] = Math.max(left[pstL], right[right.length - 1]);
-                    pstL++;
-                }
-            }
-            if (pstL >= left.length - 1 ^ pstR >= right.length - 1) {
-                rsl[rsl.length - 1] = Math.max(left[left.length - 1], right[right.length - 1]);
+        int psL = 0;
+        int psR = 0;
+        for (int i = 0; i < rsl.length; i++) {
+            if (psL == left.length){
+                rsl[i] = right[psR];
+                psR++;
+            } else if (psR == right.length) {
+                rsl[i] = left[psL];
+                psL++;
+            } else if (left[psL] <= right[psR]) {
+                rsl[i] = left[psL];
+                psL++;
+            } else {
+                rsl[i] = right[psR];
+                psR++;
             }
         }
         return rsl;
