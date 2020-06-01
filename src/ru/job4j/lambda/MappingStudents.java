@@ -11,7 +11,8 @@ public class MappingStudents {
         return studentList.stream()
                 .collect(Collectors.toMap(
                         Student::getSurname,
-                        s -> s
+                        s -> s,
+                        (s1, s2) -> s1
                 ));
     }
 }

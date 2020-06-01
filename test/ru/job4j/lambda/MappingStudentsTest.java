@@ -17,6 +17,7 @@ public class MappingStudentsTest {
         List<Student> studentList = new ArrayList<>();
         studentList.add(new Student("Petrova", 98));
         studentList.add(new Student("Udalova", 70));
+        studentList.add(new Student("Petrova", 98));
         Map<String, Student> expected = new HashMap<>();
         expected.put(studentList.get(0).getSurname(), studentList.get(0));
         expected.put(studentList.get(1).getSurname(), studentList.get(1));
