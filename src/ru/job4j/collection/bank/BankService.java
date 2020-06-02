@@ -1,9 +1,6 @@
 package ru.job4j.collection.bank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BankService {
     private Map<User, List<Account>> users = new HashMap<>();
@@ -13,49 +10,50 @@ public class BankService {
     }
 
     public void addAccount(String passport, Account account) {
-        User user = this.findByPassport(passport);
-        if (user != null) {
-            List<Account> rsl = this.users.get(user);
-            if (!rsl.contains(account)) {
+        Optional<User> user = this.findByPassport(passport);
+        if (user.isPresent()) {
+            List<Account> rsl = this.users.get(user.get());
+            Optional<Account> findAccount = rsl.stream().filter(a -> a.equals(account)).findAny();
+            if (findAccount.isEmpty()) {
                 rsl.add(account);
-                this.users.put(user, rsl);
+                this.users.put(user.get(), rsl);
             }
         }
     }
 
-    public User findByPassport(String passport) {
-        User rsl = null;
-        for (User user : users.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                rsl = user;
-                break;
-            }
-        }
-        return rsl;
+    public Optional<User> findByPassport(String passport) {
+        return this.users.keySet().stream()
+                .filter(u -> u.getPassport().equals(passport))
+                .findFirst();
     }
 
-    public Account findByRequisite(String passport, String requisite) {
-        Account rsl = null;
-        User user = findByPassport(passport);
-        if (user != null) {
-            for (Account account : this.users.get(user))  {
-                if (account.getRequisite().equals(requisite)) {
-                    rsl = account;
-                    break;
-                }
-            }
+    public Optional<Account> findByRequisite(String passport, String requisite) {
+        Optional<User> user = this.findByPassport(passport);
+        Optional<Account> account = Optional.empty();
+        if (user.isPresent()) {
+            account = this.users.get(user.get()).stream()
+                    .filter(a -> a.getRequisite()
+                    .equals(requisite))
+                    .findFirst();
         }
-        return rsl;
+        return account;
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
-        Account srcAccount = this.findByRequisite(srcPassport, srcRequisite);
-        Account destAccount = this.findByRequisite(destPassport, destRequisite);
-        boolean rsl = srcAccount != null && destAccount != null && srcAccount.getBalance() - amount >= 0;
+        Optional<Account> srcAccount = this.findByRequisite(srcPassport, srcRequisite);
+        Optional<Account> destAccount = this.findByRequisite(destPassport, destRequisite);
+        boolean rsl =
+                srcAccount.isPresent()
+                && destAccount.isPresent()
+                && srcAccount.get().getBalance() - amount >= 0;
         if (rsl) {
-            srcAccount.setBalance(srcAccount.getBalance() - amount);
-            destAccount.setBalance(destAccount.getBalance() + amount);
+            srcAccount.get().setBalance(
+                    srcAccount.get().getBalance() - amount
+            );
+            destAccount.get().setBalance(
+                    destAccount.get().getBalance() + amount
+            );
         }
         return rsl;
     }
