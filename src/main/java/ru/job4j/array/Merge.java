@@ -17,7 +17,7 @@ public class Merge {
         int psL = 0;
         int psR = 0;
         for (int i = 0; i < rsl.length; i++) {
-            if (psL == left.length){
+            if (psL == left.length) {
                 rsl[i] = right[psR];
                 psR++;
             } else if (psR == right.length) {

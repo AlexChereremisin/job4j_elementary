@@ -3,6 +3,7 @@ package ru.job4j.testtask;
 import java.util.Arrays;
 
 public class Machine {
+    @SuppressWarnings("checkstyle:MemberName")
     private final int[] COINS = {10, 5, 2, 1};
 
     public int[] change(int money, int price) {
